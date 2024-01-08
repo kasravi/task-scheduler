@@ -1,0 +1,123 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label, input, select {
+    margin-bottom: 10px;
+  }
+  
+  button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  #taskRestrictions {
+    margin-top: 30px;
+  }
+  
+  #calendar {
+    margin-top: 30px;
+    font-size: 14px;
+  }
+  
+  #downloadLink {
+    margin-top: 10px;
+    display: block;
+    text-align: center;
+  }
+  
+  .task-rest {
+    display: none;
+  }
+  
+  /* CSS for the delete button */
+  .delete-button {
+    color: red;
+    border: none;
+    margin-left: 1rem;
+    cursor: pointer;
+    height: 1.5rem;
+  }
+  
+  .delete-button:hover {
+    background-color: darkred;
+  }
+
+  #taskForm input {
+    width: 5rem;
+    display: inline;
+    height: 2rem;
+  }
+
+  #taskForm input[type=time] {
+    width: 7rem;
+    display: inline;
+    height: 2rem;
+  }
+
+  #taskForm select {
+    width: 8rem;
+    display: inline;
+    height: 2rem;
+    margin-top: 0;
+    padding-top:0;
+    padding-bottom:0;
+  }
+
+  #taskDescriptionInput{
+    width:15rem!important;
+  }
+  
+  #tasks {
+    margin-top: 2rem;
+  }
+
+  .loader {
+    transform: translate(1px, 10px);
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: none;
+    box-sizing: border-box;
+    animation: animloader 1s linear infinite;
+  }
+  
+  @keyframes animloader {
+    0% {
+      box-shadow: -72px 0 #410e8d inset;
+    }
+    100% {
+      box-shadow: 48px 0 #410e8d inset;
+    }
+  }
+  
+  #plot {
+    filter: invert(100%) hue-rotate(180deg);
+}

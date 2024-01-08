@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Scheduler</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <script
+      src="https://cdn.plot.ly/plotly-2.26.0.min.js"
+      charset="utf-8"
+    ></script>
+  </head>
+  <body>
+    <div class="container-fluid" style="padding:1rem">
+      <div class="row">
+        <div class="col-sm">
+          <form id="taskForm">
+            <div class="form-group">
+              <p>
+                I want to
+                <input
+                  class="form-control"
+                  type="text"
+                  id="taskDescriptionInput"
+                  value="clean"
+                  required
+                />
+                every
+                <input
+                  class="form-control"
+                  type="number"
+                  id="taskFrequencyInput"
+                  value="1"
+                  required
+                />
+                <select class="form-select" id="taskFrequencyUnit" required>
+                  <option value="minute">Minute(s)</option>
+                  <option value="hour">Hour(s)</option>
+                  <option value="day" selected>Day(s)</option>
+                  <option value="week">Week(s)</option>
+                  <option value="month">Month(s)</option>
+                  <option value="year">Year(s)</option>
+                </select>
+
+                I think it takes
+                <input
+                  class="form-control"
+                  type="number"
+                  id="taskLengthInput"
+                  value="10"
+                  required
+                />
+                minute(s)
+              </p>
+              <p>
+                I'm more comfortable doing it on
+                <select class="form-select" id="taskTimeOfWeek" required>
+                  <option value="weekdays">weekdays</option>
+                  <option value="weekends">weekends</option>
+                  <option value="any day" selected>any day</option>
+                </select>
+                between
+                <input
+                  type="time"
+                  class="form-control"
+                  id="taskStartTimeInput"
+                  value="08:00"
+                />
+                and
+                <input
+                  type="time"
+                  class="form-control"
+                  id="taskEndTimeInput"
+                  value="23:59"
+                />
+              </p>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:5rem;">Add</button>
+          </form>
+
+          
+          <hr />
+          <div>
+            <ul id="tasks"></ul>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div>
+          <button id="generateCalendarBtn" class="btn btn-primary">
+            Generate Calendar
+          </button>
+          <span class="loader" id="generateSpinner"></span>
+          <label for="autoGenerate">Auto Generate</label>
+          <input type="checkbox" id="autoGenerate" checked>
+        </div>
+        <hr>
+          <div id="calendar">
+            <!-- This section will be populated with the generated calendar -->
+          </div>
+          <div id="result" style="display: none">
+            <p style="margin-top: 1rem">
+              Doing these tasks requires <span id="total-difficulty"></span> of
+              your 16 hour day time.
+            </p>
+            <hr>
+            <div id="unplannedTasks">
+              <h5>Tasks that couldn't be placed with your desired frequency</h5>
+              <p>try to change the restrictions (time of day, day of week, ...)</p>
+              <p>
+                Task name
+                <span style="font-size: 0.8rem"
+                  >/ number of times you want to do it / number of times it is
+                  planned</span
+                >
+              </p>
+              <ul id="result-tasks"></ul>
+              <hr>
+            </div>
+            <div id="plot"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="packing.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
