@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
   const taskForm = document.getElementById("taskForm");
   const generateCalendarBtn = document.getElementById("generateCalendarBtn");
+  document.getElementById("importBtn").addEventListener("click", importTasks);
+  document.getElementById("exportBtn").addEventListener("click", exportTasks);
 
   function generateGuid() {
     if (
@@ -28,7 +30,45 @@ document.addEventListener("DOMContentLoaded", function () {
       );
     }
   }
+  function readFileAsJSON(callback) {
+    const input = document.createElement('input');
+    input.type = 'file';
 
+    input.onchange = (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = (event) => {
+            try {
+                const fileContent = event.target.result;
+                const jsonData = JSON.parse(fileContent);
+                callback(null, jsonData);
+            } catch (error) {
+                callback(error, null);
+            }
+        };
+
+        reader.readAsText(file);
+    };
+
+    input.click();
+}
+  function importTasks(){
+    readFileAsJSON((error, tasks) => {
+      if (error) {
+          console.error('Error reading file:', error);
+      } else {
+          console.log('JSON data:', tasks);
+          store("tasks", tasks);
+          updateTaskDisplay(tasks);
+          updateTaskInputwithTask(task);
+      }
+  });
+    
+  }
+  function exportTasks(){
+    download("tasks.json", JSON.stringify(tasks, null, 4));
+  }
   function storeCookie(name, object, expirationDays = 365 * 10) {
     const serializedObject = JSON.stringify(object);
     const expirationDate = new Date();
