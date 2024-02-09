@@ -189,7 +189,7 @@ const taskAssignment = (tasks) => {
     (365 * (24 - 8) * 60); //8 hours for sleep
   // pick a task (we should check the current difficulty (I should think about the threashhold wher you can pick the task when difficulty is not 1 based on task length))
   let lastDone = tasks.reduce((a, t) => {
-    a[t.id] = null;
+    a[t.id] = now;
     return a;
   }, {});
 
